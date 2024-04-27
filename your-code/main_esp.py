@@ -103,10 +103,32 @@ array([[[ 'D',  'D',  'D',  'B',  'D'],
         [ 'B',  'D',   'A',  'D', 'D']]])
 De nuevo, no necesitas Numpy en esta pregunta.
 """
-g = np.empty(f.shape)
+g = np.empty(f.shape, dtype=str)
 g = np.where((d > d_min) & (d < d_mean), 'B', g)
 g = np.where((d > d_mean) & (d < d_max), 'D', g)
 g = np.where((d == d_mean), 'C', g)
 g = np.where((d == d_min), 'A', g)
 g = np.where((d == d_max), 'E', g)
-print(g)
+
+h = np.empty(f.shape, dtype=str)
+h[f == 0] = 'A'
+h[f == 25] = 'B'
+h[f == 50] = 'C'
+h[f == 75] = 'D'
+h[f == 100] = 'E'
+
+def ft_fill(num):
+    if num == 0:
+        return 'A'
+    if num == 25:
+        return 'B'
+    if num == 50:
+        return 'C'
+    if num == 75:
+        return 'D'
+    else:
+        return 'E'
+i = np.vectorize(ft_fill)(f)
+
+print(h == g)
+print(g == i)
